@@ -1,1 +1,1 @@
-module: "xplanecue"
+module: "github.com/fire-ant/xplanecue"
