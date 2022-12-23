@@ -7,7 +7,8 @@ import (
 
 apiVersion: "database.aws.crossplane.io/v1alpha1"
 kind: "RDSInstance"
-metadata: name: "rdspostgresql"
+metadata:
+	name: "rdspostgresql"
 spec: xrds.#DBInstanceSpec & {
 	forProvider: {
 		region:                          "us-east-1"
@@ -17,8 +18,8 @@ spec: xrds.#DBInstanceSpec & {
 		engine:                          "postgres"
 		engineVersion:                   "12"
 	}
-	writeConnectionSecretToRef: {
+	#writeConnectionSecretToRef: {
 		namespace: "crossplane-system"
-		name:      "aws-rdspostgresql-conn"
+		name:      spec.forProvider.masterUsername + "-key"
 	}
 }
