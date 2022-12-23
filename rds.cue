@@ -1,24 +1,21 @@
-package xplanecue
+package rds
 
 import (
 	// import from this module
-	"github.com/fire-ant/xplanecue"
+	xrds "github.com/crossplane-contrib/provider-aws/apis/rds/v1alpha1"
 )
-
-rds: "rds"
 
 apiVersion: "database.aws.crossplane.io/v1alpha1"
 kind: "RDSInstance"
 metadata: name: "rdspostgresql"
-spec: #DBInstance: {
+spec: xrds.#DBInstanceSpec & {
 	forProvider: {
 		region:                          "us-east-1"
-		dbInstanceClass:                 12
+		dbInstanceClass:                 "db.t2.small"
 		masterUsername:                  "masteruser"
 		allocatedStorage:                20
 		engine:                          "postgres"
 		engineVersion:                   "12"
-		skipFinalSnapshotBeforeDeletion: true
 	}
 	writeConnectionSecretToRef: {
 		namespace: "crossplane-system"
